@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlai.boot.detect.mapper.RaspiMapper">
+
+    <!-- 获取树莓派设备分页列表 -->
+    <select id="getRaspiPage" resultType="com.youlai.boot.detect.model.vo.RaspiVO">
+        SELECT
+            u.id,
+            u.serial_number,
+            u.dept_id,
+            u.location,
+            u.upload_interval,
+            u.alert_keywords,
+            u.create_time,
+            u.update_time,
+            u.is_deleted,
+            d.NAME AS dept_name
+        FROM
+            detect_raspi u
+                LEFT JOIN sys_dept d ON u.dept_id = d.id
+        <where>
+            u.is_deleted = 0
+        </where>
+    </select>
+
+</mapper>

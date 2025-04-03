@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlai.boot.detect.mapper.CameraMapper">
+
+    <!-- 获取摄像头设备管理分页列表 -->
+    <select id="getCameraPage" resultType="com.youlai.boot.detect.model.vo.CameraVO">
+        SELECT
+                c.id,
+                c.video_url,
+                c.device_number,
+                c.raspberry_pi_id,
+                c.location,
+                c.create_time,
+                c.update_time,
+                c.is_deleted,
+                r.serial_number AS raspi_number,
+                d.name AS dept_name,
+                r.dept_id AS dept_id
+        FROM
+            detect_camera c
+                LEFT JOIN detect_raspi r ON c.raspberry_pi_id = r.id
+                LEFT JOIN sys_dept d ON r.dept_id = d.id
+        <where>
+            c.is_deleted = 0
+        </where>
+    </select>
+
+</mapper>

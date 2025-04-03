@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youlai.boot.detect.mapper.SnapshotMapper">
+
+    <!-- 获取摄像头抓拍记录分页列表 -->
+    <select id="getSnapshotPage" resultType="com.youlai.boot.detect.model.vo.SnapshotVO">
+        SELECT
+                s.id,
+                s.camera_uuid,
+                s.wet,
+                s.tem,
+                s.info,
+                s.smoke,
+                s.image_path,
+                s.grab_time,
+                s.detect_info,
+                s.create_time,
+                s.update_time,
+                s.is_deleted,
+                c.device_number AS device_number,
+                d.name AS dept_name,
+                r.dept_id AS dept_id
+        FROM
+            detect_snapshot s
+                LEFT JOIN detect_camera c ON s.camera_uuid = c.camera_uuid
+                LEFT JOIN detect_raspi r ON c.raspberry_pi_id = r.id
+                LEFT JOIN sys_dept d ON r.dept_id = d.id
+        <where>
+            <if test="queryParams.grabTime != null">
+                <if test="queryParams.grabTime[0] != null and queryParams.grabTime[0] != ''">
+                    <bind name="startDate" value="queryParams.grabTime[0].length() == 10 ? queryParams.grabTime[0] + ' 00:00:00' : queryParams.grabTime[0]"/>
+                    AND grab_time &gt;= #{startDate}
+                </if>
+                <if test="queryParams.grabTime[1] != null and queryParams.grabTime[1] != ''">
+                    <bind name="endDate" value="queryParams.grabTime[1].length() == 10 ? queryParams.grabTime[1] + ' 23:59:59' : queryParams.grabTime[1]"/>
+                    AND grab_time &lt;= #{endDate}
+                </if>
+            </if>
+        </where>
+        order by id DESC
+    </select>
+
+</mapper>
