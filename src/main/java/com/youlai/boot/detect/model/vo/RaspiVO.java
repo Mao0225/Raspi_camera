@@ -27,6 +27,14 @@ public class RaspiVO implements Serializable {
     private String serialNumber;
     @Schema(description = "所属部门id")
     private Integer deptId;
+    @Schema(description = "终端链接")
+    private String terminalLink;
+    @Schema(description = "桌面链接")
+    private String desktopLink;
+    @Schema(description = "用户名")
+    private String username;
+    @Schema(description = "密码")
+    private String password;
     @Schema(description="部门名称")
     private String deptName;
     @Schema(description="UUID")

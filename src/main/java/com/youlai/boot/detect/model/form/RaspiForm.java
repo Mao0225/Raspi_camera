@@ -30,6 +30,18 @@ public class RaspiForm implements Serializable {
     @Size(max=50, message="编号长度不能超过50个字符")
     private String serialNumber;
 
+    @Schema(description = "终端链接")
+    private String terminalLink;
+
+    @Schema(description = "桌面链接")
+    private String desktopLink;
+
+    @Schema(description = "用户名")
+    private String username;
+
+    @Schema(description = "密码")
+    private String password;
+
     @Schema(description = "所属部门id")
     @NotNull(message = "所属部门id不能为空")
     private Integer deptId;

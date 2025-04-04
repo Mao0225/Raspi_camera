@@ -36,6 +36,7 @@ public class SnapshotController  {
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPerm('detect:snapshot:query')")
     public PageResult<SnapshotVO> getSnapshotPage(SnapshotQuery queryParams ) {
+        System.out.println("分页请求信息controller"+queryParams);
         IPage<SnapshotVO> result = snapshotService.getSnapshotPage(queryParams);
         return PageResult.success(result);
     }

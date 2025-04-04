@@ -29,6 +29,26 @@ public class Raspi extends BaseEntity {
     private Integer deptId;
 
     /**
+     * 终端链接
+     */
+    private String terminalLink;
+
+    /**
+     * 桌面链接
+     */
+    private String desktopLink;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
      * 放置地点
      */
     private String location;

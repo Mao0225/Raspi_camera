@@ -1,7 +1,9 @@
 package com.youlai.boot.detect.controller;
 
+import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.service.CameraService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.youlai.boot.detect.model.form.CameraForm;
@@ -18,12 +20,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 /**
  * 摄像头设备管理前端控制层
  *
  * @author Mao
  * @since 2025-04-01 15:43
  */
+@Slf4j
 @Tag(name = "摄像头设备管理接口")
 @RestController
 @RequestMapping("/api/v1/cameras")
@@ -46,6 +51,13 @@ public class CameraController  {
     public Result<Void> saveCamera(@RequestBody @Valid CameraForm formData ) {
         boolean result = cameraService.saveCamera(formData);
         return Result.judge(result);
+    }
+
+    @Operation(summary = "监控设备下拉列表")
+    @GetMapping("/options")
+    public Result<List<Option<String>>> listCameraOptions() {
+        List<Option<String>> list = cameraService.listCameraOptions();
+        return Result.success(list);
     }
 
     @Operation(summary = "获取摄像头设备管理表单数据")

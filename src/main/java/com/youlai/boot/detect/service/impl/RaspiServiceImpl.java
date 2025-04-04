@@ -54,6 +54,11 @@ public class RaspiServiceImpl extends ServiceImpl<RaspiMapper, Raspi> implements
         return pageVO;
     }
 
+    /**
+     * 获取树莓派设备下拉列表数据
+     *
+     * @return List<Option<Long>> value 为 id
+     */
     @Override
     public List<Option<Long>> listRaspiOptions() {
         // 查询数据
@@ -112,19 +117,18 @@ public class RaspiServiceImpl extends ServiceImpl<RaspiMapper, Raspi> implements
      */
     @Override
     public boolean updateRaspi(Long id, RaspiForm formData) {
-        // 1. 唯一性校验（排除当前记录）
-        boolean exists = lambdaQuery()
-                .eq(Raspi::getSerialNumber, formData.getSerialNumber())
-                .ne(Raspi::getId, id)  // 关键点：排除自身
-                .exists();
-
-        if (exists) {
-            throw new BusinessException("设备编号已存在");
-        }
+//        // 1. 唯一性校验（排除当前记录）
+//        boolean exists = lambdaQuery()
+//                .eq(Raspi::getSerialNumber, formData.getSerialNumber())
+//                .ne(Raspi::getId, id)  // 关键点：排除自身
+//                .exists();
+//
+//        if (exists) {
+//            throw new BusinessException("设备编号已存在");
+//        }
 
         // 2. 转换并更新
         Raspi entity = raspiConverter.toEntity(formData);
-        entity.setId(id); // 确保ID被设置
         return this.updateById(entity);
     }
     

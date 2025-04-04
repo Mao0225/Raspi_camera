@@ -5,21 +5,25 @@
     <!-- 获取树莓派设备分页列表 -->
     <select id="getRaspiPage" resultType="com.youlai.boot.detect.model.vo.RaspiVO">
         SELECT
-            u.id,
-            u.serial_number,
-            u.dept_id,
-            u.location,
-            u.upload_interval,
-            u.alert_keywords,
-            u.create_time,
-            u.update_time,
-            u.is_deleted,
+            r.id,
+            r.serial_number,
+            r.dept_id,
+            r.location,
+            r.upload_interval,
+            r.alert_keywords,
+            r.create_time,
+            r.update_time,
+            r.is_deleted,
+            r.terminal_link,
+            r.desktop_link,
+            r.username,
+            r.password,
             d.NAME AS dept_name
         FROM
-            detect_raspi u
-                LEFT JOIN sys_dept d ON u.dept_id = d.id
+            detect_raspi r
+                LEFT JOIN sys_dept d ON r.dept_id = d.id
         <where>
-            u.is_deleted = 0
+            r.is_deleted = 0
         </where>
     </select>
 

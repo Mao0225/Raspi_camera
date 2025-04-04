@@ -21,4 +21,9 @@ public class SnapshotQuery extends BasePageQuery {
 
     @Schema(description = "抓取时间")
     private List<String> grabTime;
+    @Schema(description="监控Uuid")
+    private String cameraUuid;
+    @Schema(description="识别目标集合")
+    private String detectInfo;
+
 }

@@ -40,10 +40,13 @@ public class SnapshotServiceImpl extends ServiceImpl<SnapshotMapper, Snapshot> i
     */
     @Override
     public IPage<SnapshotVO> getSnapshotPage(SnapshotQuery queryParams) {
+        System.out.println("分页请求信息"+queryParams);
+
         Page<SnapshotVO> pageVO = this.baseMapper.getSnapshotPage(
                 new Page<>(queryParams.getPageNum(), queryParams.getPageSize()),
                 queryParams
         );
+        System.out.println("分页响应信息"+pageVO);
         return pageVO;
     }
     

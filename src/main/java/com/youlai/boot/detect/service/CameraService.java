@@ -1,11 +1,14 @@
 package com.youlai.boot.detect.service;
 
+import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.model.entity.Camera;
 import com.youlai.boot.detect.model.form.CameraForm;
 import com.youlai.boot.detect.model.query.CameraQuery;
 import com.youlai.boot.detect.model.vo.CameraVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * 摄像头设备管理服务类
@@ -55,4 +58,5 @@ public interface CameraService extends IService<Camera> {
      */
     boolean deleteCameras(String ids);
 
+    List<Option<String>> listCameraOptions();
 }

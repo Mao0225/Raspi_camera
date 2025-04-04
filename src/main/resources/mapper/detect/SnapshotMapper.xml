@@ -26,6 +26,7 @@
                 LEFT JOIN detect_raspi r ON c.raspberry_pi_id = r.id
                 LEFT JOIN sys_dept d ON r.dept_id = d.id
         <where>
+            s.is_deleted = 0
             <if test="queryParams.grabTime != null">
                 <if test="queryParams.grabTime[0] != null and queryParams.grabTime[0] != ''">
                     <bind name="startDate" value="queryParams.grabTime[0].length() == 10 ? queryParams.grabTime[0] + ' 00:00:00' : queryParams.grabTime[0]"/>
@@ -35,6 +36,12 @@
                     <bind name="endDate" value="queryParams.grabTime[1].length() == 10 ? queryParams.grabTime[1] + ' 23:59:59' : queryParams.grabTime[1]"/>
                     AND grab_time &lt;= #{endDate}
                 </if>
+            </if>
+            <if test="queryParams.cameraUuid != null and queryParams.cameraUuid != ''">
+                AND s.camera_uuid = #{queryParams.cameraUuid}
+            </if>
+            <if test="queryParams.detectInfo != null and queryParams.detectInfo != ''">
+                AND s.detect_info LIKE CONCAT('%',#{queryParams.detectInfo},'%')
             </if>
         </where>
         order by id DESC

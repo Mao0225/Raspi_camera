@@ -1,8 +1,8 @@
 package com.youlai.boot.detect.service.impl;
 
 import cn.hutool.core.lang.UUID;
-import com.youlai.boot.common.exception.BusinessException;
-import com.youlai.boot.detect.model.entity.Raspi;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.service.RaspiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,6 @@ import com.youlai.boot.detect.converter.CameraConverter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -51,6 +50,20 @@ public class CameraServiceImpl extends ServiceImpl<CameraMapper, Camera> impleme
                 queryParams
         );
         return pageVO;
+    }
+
+    /**
+     * 获取摄像头设备下拉列表数据
+     *
+     * @return List<Option<Long>> value 为 camera_uuid
+     */
+    @Override
+    public List<Option<String>> listCameraOptions() {
+        // 查询数据
+        List<Camera> cameraList = this.list(new LambdaQueryWrapper<Camera>().select(Camera::getCameraUuid, Camera::getDeviceNumber));
+
+        // 实体转换
+        return cameraConverter.toOptions(cameraList);
     }
     
     /**
