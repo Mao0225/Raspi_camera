@@ -3,27 +3,37 @@
 <mapper namespace="com.youlai.boot.detect.mapper.RaspiMapper">
 
     <!-- 获取树莓派设备分页列表 -->
-    <select id="getRaspiPage" resultType="com.youlai.boot.detect.model.vo.RaspiVO">
+    <select id="getRaspiPage" resultType="com.youlai.boot.detect.model.vo.RaspiPageVO">
         SELECT
-            r.id,
-            r.serial_number,
-            r.dept_id,
-            r.location,
-            r.upload_interval,
-            r.alert_keywords,
-            r.create_time,
-            r.update_time,
-            r.is_deleted,
-            r.terminal_link,
-            r.desktop_link,
-            r.username,
-            r.password,
-            d.NAME AS dept_name
+        r.id,
+        r.serial_number,
+        r.dept_id,
+        r.location,
+        r.upload_interval,
+        r.alert_keywords,
+        r.create_time,
+        r.update_time,
+        r.is_deleted,
+        r.terminal_link,
+        r.desktop_link,
+        r.username,
+        r.password,
+        d.NAME AS dept_name
         FROM
-            detect_raspi r
-                LEFT JOIN sys_dept d ON r.dept_id = d.id
+        detect_raspi r
+        LEFT JOIN sys_dept d ON r.dept_id = d.id
         <where>
             r.is_deleted = 0
+        </where>
+    </select>
+    <select id="listRaspiOptions" resultType="com.youlai.boot.detect.model.vo.RaspiOptionVO">
+        SELECT
+        id,
+        serial_number
+        FROM
+        detect_raspi
+        <where>
+            is_deleted = 0
         </where>
     </select>
 

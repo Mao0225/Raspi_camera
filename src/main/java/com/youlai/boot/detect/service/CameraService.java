@@ -4,7 +4,7 @@ import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.model.entity.Camera;
 import com.youlai.boot.detect.model.form.CameraForm;
 import com.youlai.boot.detect.model.query.CameraQuery;
-import com.youlai.boot.detect.model.vo.CameraVO;
+import com.youlai.boot.detect.model.vo.CameraPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,7 +23,7 @@ public interface CameraService extends IService<Camera> {
      *
      * @return
      */
-    IPage<CameraVO> getCameraPage(CameraQuery queryParams);
+    IPage<CameraPageVO> getCameraPage(CameraQuery queryParams);
 
     /**
      * 获取摄像头设备管理表单数据

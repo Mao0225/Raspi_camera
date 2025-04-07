@@ -2,6 +2,7 @@ package com.youlai.boot.detect.converter;
 
 import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.model.entity.Raspi;
+import com.youlai.boot.detect.model.vo.CameraOptionVO;
 import org.mapstruct.Mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.youlai.boot.detect.model.entity.Camera;
@@ -28,7 +29,7 @@ public interface CameraConverter{
             @Mapping(target = "value", source = "cameraUuid"), // cameraUuid是String/UUID
             @Mapping(target = "label", source = "deviceNumber")
     })
-    Option<String> toOption(Camera camera);
+    Option<String> toOption(CameraOptionVO camera);
 
-    List<Option<String>> toOptions(List<Camera> cameras);
+    List<Option<String>> toOptions(List<CameraOptionVO> cameras);
 }

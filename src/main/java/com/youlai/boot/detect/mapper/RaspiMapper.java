@@ -5,8 +5,11 @@ import com.youlai.boot.common.annotation.DataPermission;
 import com.youlai.boot.detect.model.entity.Raspi;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.youlai.boot.detect.model.query.RaspiQuery;
-import com.youlai.boot.detect.model.vo.RaspiVO;
+import com.youlai.boot.detect.model.vo.RaspiOptionVO;
+import com.youlai.boot.detect.model.vo.RaspiPageVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 树莓派设备Mapper接口
@@ -25,6 +28,8 @@ public interface RaspiMapper extends BaseMapper<Raspi> {
      * @return
      */
     @DataPermission
-    Page<RaspiVO> getRaspiPage(Page<RaspiVO> page, RaspiQuery queryParams);
+    Page<RaspiPageVO> getRaspiPage(Page<RaspiPageVO> page, RaspiQuery queryParams);
 
+    @DataPermission
+    List<RaspiOptionVO> listRaspiOptions();
 }

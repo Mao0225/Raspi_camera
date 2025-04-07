@@ -4,7 +4,7 @@ import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.model.entity.Raspi;
 import com.youlai.boot.detect.model.form.RaspiForm;
 import com.youlai.boot.detect.model.query.RaspiQuery;
-import com.youlai.boot.detect.model.vo.RaspiVO;
+import com.youlai.boot.detect.model.vo.RaspiPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,7 +23,7 @@ public interface RaspiService extends IService<Raspi> {
      *
      * @return
      */
-    IPage<RaspiVO> getRaspiPage(RaspiQuery queryParams);
+    IPage<RaspiPageVO> getRaspiPage(RaspiQuery queryParams);
 
     /**
      * 获取树莓派设备表单数据

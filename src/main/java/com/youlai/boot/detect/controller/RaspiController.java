@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.youlai.boot.detect.model.form.RaspiForm;
 import com.youlai.boot.detect.model.query.RaspiQuery;
-import com.youlai.boot.detect.model.vo.RaspiVO;
+import com.youlai.boot.detect.model.vo.RaspiPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.youlai.boot.common.result.PageResult;
 import com.youlai.boot.common.result.Result;
@@ -38,8 +38,8 @@ public class RaspiController  {
     @Operation(summary = "树莓派设备分页列表")
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPerm('detect:raspi:query')")
-    public PageResult<RaspiVO> getRaspiPage(RaspiQuery queryParams ) {
-        IPage<RaspiVO> result = raspiService.getRaspiPage(queryParams);
+    public PageResult<RaspiPageVO> getRaspiPage(RaspiQuery queryParams ) {
+        IPage<RaspiPageVO> result = raspiService.getRaspiPage(queryParams);
         return PageResult.success(result);
     }
 

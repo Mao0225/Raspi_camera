@@ -1,12 +1,9 @@
 package com.youlai.boot.detect.service.impl;
 
 import cn.hutool.core.lang.UUID;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.youlai.boot.common.constant.SystemConstants;
 import com.youlai.boot.common.exception.BusinessException;
 import com.youlai.boot.common.model.Option;
-import com.youlai.boot.core.security.util.SecurityUtils;
-import com.youlai.boot.system.model.entity.Role;
+import com.youlai.boot.detect.model.vo.RaspiOptionVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -17,12 +14,11 @@ import com.youlai.boot.detect.service.RaspiService;
 import com.youlai.boot.detect.model.entity.Raspi;
 import com.youlai.boot.detect.model.form.RaspiForm;
 import com.youlai.boot.detect.model.query.RaspiQuery;
-import com.youlai.boot.detect.model.vo.RaspiVO;
+import com.youlai.boot.detect.model.vo.RaspiPageVO;
 import com.youlai.boot.detect.converter.RaspiConverter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -43,11 +39,11 @@ public class RaspiServiceImpl extends ServiceImpl<RaspiMapper, Raspi> implements
     * 获取树莓派设备分页列表
     *
     * @param queryParams 查询参数
-    * @return {@link IPage<RaspiVO>} 树莓派设备分页列表
+    * @return {@link IPage< RaspiPageVO >} 树莓派设备分页列表
     */
     @Override
-    public IPage<RaspiVO> getRaspiPage(RaspiQuery queryParams) {
-        Page<RaspiVO> pageVO = this.baseMapper.getRaspiPage(
+    public IPage<RaspiPageVO> getRaspiPage(RaspiQuery queryParams) {
+        Page<RaspiPageVO> pageVO = this.baseMapper.getRaspiPage(
                 new Page<>(queryParams.getPageNum(), queryParams.getPageSize()),
                 queryParams
         );
@@ -62,8 +58,9 @@ public class RaspiServiceImpl extends ServiceImpl<RaspiMapper, Raspi> implements
     @Override
     public List<Option<Long>> listRaspiOptions() {
         // 查询数据
-        List<Raspi> raspiList = this.list(new LambdaQueryWrapper<Raspi>().select(Raspi::getId, Raspi::getSerialNumber));
-
+//        List<Raspi> raspiList = this.list(new LambdaQueryWrapper<Raspi>().select(Raspi::getId, Raspi::getSerialNumber));
+            // 查询数据
+        List<RaspiOptionVO> raspiList = this.baseMapper.listRaspiOptions();
         // 实体转换
         return raspiConverter.toOptions(raspiList);
     }

@@ -1,8 +1,8 @@
 package com.youlai.boot.detect.converter;
 
 import com.youlai.boot.common.model.Option;
+import com.youlai.boot.detect.model.vo.RaspiOptionVO;
 import org.mapstruct.Mapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.youlai.boot.detect.model.entity.Raspi;
 import com.youlai.boot.detect.model.form.RaspiForm;
 import org.mapstruct.Mapping;
@@ -27,7 +27,7 @@ public interface RaspiConverter{
             @Mapping(target = "value", source = "id"),
             @Mapping(target = "label", source = "serialNumber")
     })
-    Option<Long> toOption(Raspi raspi);
+    Option<Long> toOption(RaspiOptionVO raspis);
 
-    List<Option<Long>> toOptions(List<Raspi> raspis);
+    List<Option<Long>> toOptions(List<RaspiOptionVO> raspis);
 }

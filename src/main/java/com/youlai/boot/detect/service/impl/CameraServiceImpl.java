@@ -3,6 +3,8 @@ package com.youlai.boot.detect.service.impl;
 import cn.hutool.core.lang.UUID;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.youlai.boot.common.model.Option;
+import com.youlai.boot.detect.model.vo.CameraOptionVO;
+import com.youlai.boot.detect.model.vo.RaspiOptionVO;
 import com.youlai.boot.detect.service.RaspiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ import com.youlai.boot.detect.service.CameraService;
 import com.youlai.boot.detect.model.entity.Camera;
 import com.youlai.boot.detect.model.form.CameraForm;
 import com.youlai.boot.detect.model.query.CameraQuery;
-import com.youlai.boot.detect.model.vo.CameraVO;
+import com.youlai.boot.detect.model.vo.CameraPageVO;
 import com.youlai.boot.detect.converter.CameraConverter;
 
 import java.util.Arrays;
@@ -41,11 +43,11 @@ public class CameraServiceImpl extends ServiceImpl<CameraMapper, Camera> impleme
     * 获取摄像头设备管理分页列表
     *
     * @param queryParams 查询参数
-    * @return {@link IPage<CameraVO>} 摄像头设备管理分页列表
+    * @return {@link IPage< CameraPageVO >} 摄像头设备管理分页列表
     */
     @Override
-    public IPage<CameraVO> getCameraPage(CameraQuery queryParams) {
-        Page<CameraVO> pageVO = this.baseMapper.getCameraPage(
+    public IPage<CameraPageVO> getCameraPage(CameraQuery queryParams) {
+        Page<CameraPageVO> pageVO = this.baseMapper.getCameraPage(
                 new Page<>(queryParams.getPageNum(), queryParams.getPageSize()),
                 queryParams
         );
@@ -60,8 +62,8 @@ public class CameraServiceImpl extends ServiceImpl<CameraMapper, Camera> impleme
     @Override
     public List<Option<String>> listCameraOptions() {
         // 查询数据
-        List<Camera> cameraList = this.list(new LambdaQueryWrapper<Camera>().select(Camera::getCameraUuid, Camera::getDeviceNumber));
-
+//        List<Camera> cameraList = this.list(new LambdaQueryWrapper<Camera>().select(Camera::getCameraUuid, Camera::getDeviceNumber));
+        List<CameraOptionVO> cameraList = this.baseMapper.listCameraOptions();
         // 实体转换
         return cameraConverter.toOptions(cameraList);
     }

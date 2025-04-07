@@ -3,7 +3,7 @@
 <mapper namespace="com.youlai.boot.detect.mapper.CameraMapper">
 
     <!-- 获取摄像头设备管理分页列表 -->
-    <select id="getCameraPage" resultType="com.youlai.boot.detect.model.vo.CameraVO">
+    <select id="getCameraPage" resultType="com.youlai.boot.detect.model.vo.CameraPageVO">
         SELECT
                 c.id,
                 c.video_url,
@@ -23,6 +23,16 @@
         <where>
             c.is_deleted = 0
         </where>
+    </select>
+    <select id="listCameraOptions" resultType="com.youlai.boot.detect.model.vo.CameraOptionVO">
+        SELECT
+            c.camera_uuid,
+            c.device_number
+        FROM
+            detect_camera c
+                left join detect_raspi r on c.raspberry_pi_id = r.id
+        WHERE
+            c.is_deleted = 0
     </select>
 
 </mapper>

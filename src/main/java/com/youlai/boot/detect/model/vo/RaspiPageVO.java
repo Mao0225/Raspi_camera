@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
 
 /**
  * 树莓派设备视图对象
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Schema( description = "树莓派设备视图对象")
-public class RaspiVO implements Serializable {
+public class RaspiPageVO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

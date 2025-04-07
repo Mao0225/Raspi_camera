@@ -5,8 +5,11 @@ import com.youlai.boot.common.annotation.DataPermission;
 import com.youlai.boot.detect.model.entity.Camera;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.youlai.boot.detect.model.query.CameraQuery;
-import com.youlai.boot.detect.model.vo.CameraVO;
+import com.youlai.boot.detect.model.vo.CameraOptionVO;
+import com.youlai.boot.detect.model.vo.CameraPageVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 摄像头设备管理Mapper接口
@@ -25,7 +28,7 @@ public interface CameraMapper extends BaseMapper<Camera> {
      * @return
      */
     @DataPermission(deptAlias = "r")
-
-    Page<CameraVO> getCameraPage(Page<CameraVO> page, CameraQuery queryParams);
-
+    Page<CameraPageVO> getCameraPage(Page<CameraPageVO> page, CameraQuery queryParams);
+    @DataPermission(deptAlias = "r")
+    List<CameraOptionVO> listCameraOptions();
 }

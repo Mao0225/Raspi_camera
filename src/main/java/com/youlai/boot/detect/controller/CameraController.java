@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.youlai.boot.detect.model.form.CameraForm;
 import com.youlai.boot.detect.model.query.CameraQuery;
-import com.youlai.boot.detect.model.vo.CameraVO;
+import com.youlai.boot.detect.model.vo.CameraPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.youlai.boot.common.result.PageResult;
 import com.youlai.boot.common.result.Result;
@@ -40,8 +40,8 @@ public class CameraController  {
     @Operation(summary = "摄像头设备管理分页列表")
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPerm('detect:camera:query')")
-    public PageResult<CameraVO> getCameraPage(CameraQuery queryParams ) {
-        IPage<CameraVO> result = cameraService.getCameraPage(queryParams);
+    public PageResult<CameraPageVO> getCameraPage(CameraQuery queryParams ) {
+        IPage<CameraPageVO> result = cameraService.getCameraPage(queryParams);
         return PageResult.success(result);
     }
 
