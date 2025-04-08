@@ -7,6 +7,7 @@ import com.youlai.boot.detect.model.query.CameraQuery;
 import com.youlai.boot.detect.model.vo.CameraPageVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.youlai.boot.detect.model.vo.VideoPreviewVO;
 
 import java.util.List;
 
@@ -57,6 +58,18 @@ public interface CameraService extends IService<Camera> {
      * @return
      */
     boolean deleteCameras(String ids);
+    /**
+     * 视频预览及最新信息查看
+     *
+     * @param raspiId 树莓派id
+     * @return
+     */
+    List<VideoPreviewVO> vedioPreviewList(Long raspiId);
 
+    /**
+     * 摄像头设备管理下拉列表
+     *
+     * @return
+     */
     List<Option<String>> listCameraOptions();
 }

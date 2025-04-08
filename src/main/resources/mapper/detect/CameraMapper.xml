@@ -34,5 +34,29 @@
         WHERE
             c.is_deleted = 0
     </select>
+    <select id="getVideoPreviewList" resultType="com.youlai.boot.detect.model.vo.VideoPreviewVO">
+        SELECT
+            c.device_number,
+            c.video_url,
+            s.wet,
+            s.tem,
+            s.info,
+            s.smoke,
+            s.image_path,
+            s.grab_time,
+            s.detect_info
+        FROM
+            detect_camera c
+                LEFT JOIN LATERAL (
+                SELECT *
+                FROM detect_snapshot s
+                WHERE s.camera_uuid = c.camera_uuid
+                ORDER BY s.grab_time DESC
+                LIMIT 1
+                ) s ON true
+        <if test="raspiId != null">
+            WHERE c.raspberry_pi_id = #{raspiId}
+        </if>
+    </select>
 
 </mapper>

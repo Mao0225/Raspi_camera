@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.youlai.boot.detect.model.query.CameraQuery;
 import com.youlai.boot.detect.model.vo.CameraOptionVO;
 import com.youlai.boot.detect.model.vo.CameraPageVO;
+import com.youlai.boot.detect.model.vo.VideoPreviewVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public interface CameraMapper extends BaseMapper<Camera> {
      */
     @DataPermission(deptAlias = "r")
     Page<CameraPageVO> getCameraPage(Page<CameraPageVO> page, CameraQuery queryParams);
+
     @DataPermission(deptAlias = "r")
     List<CameraOptionVO> listCameraOptions();
+
+    List<VideoPreviewVO> getVideoPreviewList(Long raspiId);
 }

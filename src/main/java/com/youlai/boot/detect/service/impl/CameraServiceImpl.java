@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.youlai.boot.common.model.Option;
 import com.youlai.boot.detect.model.vo.CameraOptionVO;
 import com.youlai.boot.detect.model.vo.RaspiOptionVO;
+import com.youlai.boot.detect.model.vo.VideoPreviewVO;
 import com.youlai.boot.detect.service.RaspiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -123,6 +124,14 @@ public class CameraServiceImpl extends ServiceImpl<CameraMapper, Camera> impleme
                 .map(Long::parseLong)
                 .toList();
         return this.removeByIds(idList);
+    }
+
+    @Override
+    public List<VideoPreviewVO> vedioPreviewList(Long raspiId) {
+
+        List<VideoPreviewVO> videoPreviewList = this.baseMapper.getVideoPreviewList(raspiId);
+
+        return videoPreviewList;
     }
 
 }

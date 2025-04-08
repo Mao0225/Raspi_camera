@@ -1,6 +1,7 @@
 package com.youlai.boot.detect.controller;
 
 import com.youlai.boot.common.model.Option;
+import com.youlai.boot.detect.model.vo.VideoPreviewVO;
 import com.youlai.boot.detect.service.CameraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -89,5 +90,15 @@ public class CameraController  {
     ) {
         boolean result = cameraService.deleteCameras(ids);
         return Result.judge(result);
+    }
+
+
+    @Operation(summary = "摄像头视频预览列表")
+    @GetMapping("/preview/{raspiId}")
+    public Result<List<VideoPreviewVO>> vedioPreviewList(
+            @Parameter(description = "raspiId") @PathVariable Long raspiId
+    ) {
+        List<VideoPreviewVO> list = cameraService.vedioPreviewList(raspiId);
+        return Result.success(list);
     }
 }
