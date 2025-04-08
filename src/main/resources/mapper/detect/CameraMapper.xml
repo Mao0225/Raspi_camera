@@ -54,9 +54,12 @@
                 ORDER BY s.grab_time DESC
                 LIMIT 1
                 ) s ON true
+        WHERE
+            c.is_deleted = 0
         <if test="raspiId != null">
-            WHERE c.raspberry_pi_id = #{raspiId}
+            AND c.raspberry_pi_id = #{raspiId}
         </if>
+
     </select>
 
 </mapper>
